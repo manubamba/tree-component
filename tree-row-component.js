@@ -1,5 +1,5 @@
+import React, {Component, PropTypes} from 'react';
 import R from 'ramda';
-import React, {Component, PropTypes} from 'react'; // eslint-disable-line no-unused-vars
 import classNames from 'classnames';
 
 export default class TreeRowComponent extends Component {
