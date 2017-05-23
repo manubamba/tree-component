@@ -42,9 +42,9 @@ export default class Row extends React.Component {
   }
 
   @autobind
-  handleClick(e) {
-      this.props.onClick(this.props.nodeId);
-      e.stopPropagation();
+  handleClick(event) {
+      this.props.onClick(event, this.props.nodeId);
+      event.stopPropagation();
   }
 
   render() {

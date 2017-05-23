@@ -25,7 +25,7 @@ const RowRendererComponent = (props) => {
     >
       {label}
       <i className={className} data-id={id} data-type={type} />
-      <a onClick={() => deleteNode(id)}>D</a>
+      <a className="delete">D</a>
     </TreeRow>);
 };
 

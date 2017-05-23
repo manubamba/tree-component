@@ -4,7 +4,10 @@ import R from 'ramda';
 import classNames from 'classnames';
 import Tree from './tree-component';
 import './styles.less';
+import {deleteNodeWithChildren} from './helpers';
 import TreeRow from './tree-row-component';
+import RowRenderer from './row-renderer';
+import nodes from './mock-data';
 
 const MOCK_SERVER_TIME = 0;
 
@@ -53,16 +56,24 @@ export default class App extends React.Component {
               R.assoc(newNode1.id, newNode1),
               R.assoc(newNode2.id, newNode2),
             )(this.state.nodes.byId);
-            const ids = R.concat([newNode1.id, newNode2.id], this.state.nodes.ids);
             this.setState({
               nodes: {
                 ...this.state.nodes,
-                byId,
-                ids,
+                byId
               }
             });
           })
       }, MOCK_SERVER_TIME)
+    }
+  }
+
+  @autobind
+  handleClick(event, nodeId) {
+    const classNames = event.target.className;
+    if (R.contains('delete', classNames)) {
+      this.setState({
+        nodes: deleteNodeWithChildren(this.state.nodes, nodeId)
+      });
     }
   }
 
@@ -72,7 +83,9 @@ export default class App extends React.Component {
       <div className="tree-wrapper">
         <Tree
         nodes={nodes}
+        onClick={this.handleClick}
         onExpand={this.handleExpand}
+        onSelect={R.T}
         rowRenderer={RowRenderer}
         onCollapse={this.handleCollapse}/>
       </div>

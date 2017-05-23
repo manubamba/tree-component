@@ -48,7 +48,8 @@ export default class TreeComponent extends React.Component {
   }
 
   @autobind
-  handleClick(nodeId) {
+  handleClick(event, nodeId) {
+    this.props.onClick(event, nodeId);
     if (!this.props.multiselectMode) {
       if (this.state.selectedNodeIds.contains(nodeId)) {
         this.setState({
@@ -57,23 +58,35 @@ export default class TreeComponent extends React.Component {
       } else {
         this.setState({
           selectedNodeIds: List([nodeId])
-        })
+        });
+        this.props.onSelect(nodeId, this.state.selectedNodeIds);
       }
     }
   }
 
+  filterCurrentNodes(newNodes, nodesToFilter) {
+    return nodesToFilter.filter((nodeId) => R.contains(nodeId, R.keys(newNodes.byId)));
+  }
+
   componentWillReceiveProps(newProps) {
     const loadingNodeIds = this.state.loadingNodeIds.filter((nodeId) => !newProps.nodes.byId[nodeId].childIds);
+    const newNodes = this.getImmutableData(newProps.nodes);
     this.setState({
-      nodes: this.getImmutableData(newProps.nodes),
+      nodes: newNodes,
       loadingNodeIds,
-    })
+    });
+    this.setState({
+      expandedNodeIds: this.filterCurrentNodes(newNodes, this.state.expandedNodeIds),
+      loadingNodeIds: this.filterCurrentNodes(newNodes, this.state.loadingNodeIds),
+      selectedNodeIds: this.filterCurrentNodes(newNodes, this.state.selectedNodeIds),
+    });
   }
 
   render() {
     const {selectedNodeIds, expandedNodeIds, loadingNodeIds, nodes} = this.state;
     const {rowRenderer} = this.props;
     const rootNodeIds = nodes.get('rootIds');
+    //TODO: can try to optimise to send only children to rows
     return (
       <div className="rows-container">
       {rootNodeIds.map((nodeId) => {
