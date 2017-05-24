@@ -68,11 +68,11 @@ export default class App extends React.Component {
   }
 
   @autobind
-  handleClick(event, nodeId) {
+  handleClick(event, nodeId, parentId) {
     const classNames = event.target.className;
     if (R.contains('delete', classNames)) {
       this.setState({
-        nodes: deleteNodeWithChildren(this.state.nodes, nodeId)
+        nodes: deleteNodeWithChildren(this.state.nodes, nodeId, parentId)
       });
     }
   }

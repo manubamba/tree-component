@@ -48,8 +48,8 @@ export default class TreeComponent extends React.Component {
   }
 
   @autobind
-  handleClick(event, nodeId) {
-    this.props.onClick(event, nodeId);
+  handleClick(event, nodeId, parentId) {
+    this.props.onClick(event, nodeId, parentId);
     if (!this.props.multiselectMode) {
       if (this.state.selectedNodeIds.contains(nodeId)) {
         this.setState({
@@ -59,7 +59,7 @@ export default class TreeComponent extends React.Component {
         this.setState({
           selectedNodeIds: List([nodeId])
         });
-        this.props.onSelect(nodeId, this.state.selectedNodeIds);
+        this.props.onSelect(nodeId, this.state.selectedNodeIds, parentId);
       }
     }
   }

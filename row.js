@@ -43,7 +43,7 @@ export default class Row extends React.Component {
 
   @autobind
   handleClick(event) {
-      this.props.onClick(event, this.props.nodeId);
+      this.props.onClick(event, this.props.nodeId, this.props.parentId);
       event.stopPropagation();
   }
 
@@ -94,6 +94,7 @@ export default class Row extends React.Component {
                   depth={depth + 1}
                   onClick={onClick}
                   onToggle={onToggle}
+                  parentId={node.get('id')}
                   rowRenderer={TitleRenderer}
                   selectedNodeIds={selectedNodeIds}
           />})}
