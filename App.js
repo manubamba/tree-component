@@ -1,15 +1,15 @@
-import React from "react";
-import { Map } from "immutable";
+import React from 'react';
+import { Map } from 'immutable';
 
-import { autobind } from "core-decorators";
-import R from "ramda";
-import classNames from "classnames";
-import Tree from "./tree-component";
-import "./styles.less";
-import { deleteNodeWithChildren } from "./helpers";
-import TreeRow from "./tree-row-component";
-import RowRenderer from "./row-renderer";
-import nodes from "./mock-data";
+import { autobind } from 'core-decorators';
+import R from 'ramda';
+import classNames from 'classnames';
+import Tree from './tree-component';
+import './styles.less';
+import { deleteNodeWithChildren } from './helpers';
+import TreeRow from './tree-row-component';
+import RowRenderer from './row-renderer';
+import nodes from './mock-data';
 
 const MOCK_SERVER_TIME = 0;
 
@@ -27,7 +27,7 @@ export default class App extends React.Component {
   };
   getRandomWord() {
     return fetch(
-      "http://www.setgetgo.com/randomword/get.php?len=4"
+      'http://www.setgetgo.com/randomword/get.php?len=4'
     ).then(resp => resp.text());
   }
 
@@ -53,7 +53,7 @@ export default class App extends React.Component {
             };
             const byId = R.pipe(
               R.evolve({
-                [nodeId]: R.assoc("childIds", [newNode1.id, newNode2.id])
+                [nodeId]: R.assoc('childIds', [newNode1.id, newNode2.id])
               }),
               R.assoc(newNode1.id, newNode1),
               R.assoc(newNode2.id, newNode2)
@@ -71,7 +71,7 @@ export default class App extends React.Component {
 
   @autobind handleClick(event, nodeId, parentId) {
     const classNames = event.target.className;
-    if (R.contains("delete", classNames)) {
+    if (R.contains('delete', classNames)) {
       this.setState({
         nodes: deleteNodeWithChildren(this.state.nodes, nodeId, parentId)
       });
@@ -80,9 +80,9 @@ export default class App extends React.Component {
 
   @autobind shouldSelectNode(node) {
     console.log(
-      "shouldSelectNode ",
+      'shouldSelectNode ',
       node.id,
-      "---",
+      '---',
       this.tree.getSelectedNode()
     );
 
@@ -95,14 +95,14 @@ export default class App extends React.Component {
   render() {
     const { nodes } = this.state;
     return (
-      <div className="tree-wrapper">
+      <div className='tree-wrapper'>
         <Tree
           nodes={nodes}
           onClick={this.handleClick}
           onExpand={this.handleExpand}
           ref={c => {
             this.tree = c && c.state;
-            console.log("Tree ", c);
+            console.log('Tree ', c);
           }}
           shouldSelectNode={this.shouldSelectNode}
           rowRenderer={RowRenderer}

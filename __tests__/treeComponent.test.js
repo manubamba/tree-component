@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-describe("<Tree/>", () => {
-  test("should pass", () => {
+describe('<Tree/>', () => {
+  test('should pass', () => {
     expect(1 === 1).toBe(true);
   });
 

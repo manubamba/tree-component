@@ -1,35 +1,89 @@
-.tree-wrapper {
-  display: flex;
-  width: 400px;
-  .rows-container {
-    width: 100%;
-    .row-wrapper {
-      display: flex;
-      flex: 1;
-      flex-wrap: wrap;
-      padding-left: 20px;
-      .toggle-wrapper {
-        min-width: 20px;
-      }
-      .title-wrapper {
-        flex: 1;
-      }
-    }
-    .children-container {
-      flex-basis: 100%;
-    }
-  }
-
-  #app div div div div {
-    margin-left: 0px;
-  }
-
-  .infinite-tree-selected {
-    background-color: rgba(0, 44, 51, 0.3);
-  }
-
-  .infinite-tree-item {
-    display: flex;
-    flex: 1;
-  }
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500);
+body {
+    font-family: Roboto
 }
+
+.tree-wrapper {
+    width: 400px;
+    .rows-container {
+        width: 100%;
+    }
+}
+
+.row-wrapper {
+    display: flex;
+    flex-direction: column;
+    .node-header {
+        display: flex;
+        .toggle-wrapper {
+            min-width: 15px;
+        }
+        .title-wrapper {
+            padding-left: 5px;
+        }
+    }
+    .node-body {
+        margin-left: 20px;
+    }
+}
+
+.expand,
+.collapse {
+    position: relative;
+}
+
+.collapse:after {
+    content: '';
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-top: 8px solid black;
+    border-right: 8px solid transparent;
+}
+
+.expand:after {
+    content: '';
+    position: absolute;
+    border-left: 8px solid black;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+
+
+/*
+********************************************************************
+Old Styles
+********************************************************************
+*/
+
+// .tree-wrapper {
+//     display: flex;
+//     width: 400px;
+//     .rows-container {
+//         width: 100%;
+//         .row-wrapper {
+//             display: flex;
+//             flex: 1;
+//             flex-wrap: wrap;
+//             padding-left: 20px;
+//             .toggle-wrapper {
+//                 min-width: 20px;
+//             }
+//             .title-wrapper {
+//                 flex: 1;
+//             }
+//         }
+//         .children-container {
+//             flex-basis: 100%;
+//         }
+//     }
+//     #app div div div div {
+//         margin-left: 0px;
+//     }
+//     .infinite-tree-selected {
+//         background-color: rgba(0, 44, 51, 0.3);
+//     }
+//     .infinite-tree-item {
+//         display: flex;
+//         flex: 1;
+//     }
+// }

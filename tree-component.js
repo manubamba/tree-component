@@ -1,9 +1,9 @@
-import React from "react";
-import Row from "./row";
-import R from "ramda";
-import { fromJS, List, updateAt } from "immutable";
-import { autobind } from "core-decorators";
-import Title from "./title";
+import React from 'react';
+import Row from './row';
+import R from 'ramda';
+import { fromJS, List, updateAt } from 'immutable';
+import { autobind } from 'core-decorators';
+import Title from './title';
 
 export default class TreeComponent extends React.Component {
   static propTypes = {
@@ -44,7 +44,7 @@ export default class TreeComponent extends React.Component {
       });
     }
     this.props.onExpand(nodeId);
-    if (this.state.nodes.getIn(["byId", nodeId, "lazyLoad"])) {
+    if (this.state.nodes.getIn(['byId', nodeId, 'lazyLoad'])) {
       this.setState({
         loadingNodeIds: this.state.loadingNodeIds.push(nodeId)
       });
@@ -78,13 +78,13 @@ export default class TreeComponent extends React.Component {
 
   filterCurrentNodes(newNodes, nodesToFilter) {
     console.log(
-      "filterCurrentNodes ",
-      newNodes.get("byId"),
-      " ",
+      'filterCurrentNodes ',
+      newNodes.get('byId'),
+      ' ',
       nodesToFilter
     );
     return nodesToFilter.filter(nodeId =>
-      R.contains(nodeId, R.keys(newNodes.get("byId").keys))
+      R.contains(nodeId, R.keys(newNodes.get('byId').keys))
     );
   }
 
@@ -121,16 +121,16 @@ export default class TreeComponent extends React.Component {
       nodes
     } = this.state;
     const { rowRenderer } = this.props;
-    const rootNodeIds = nodes.get("rootIds");
+    const rootNodeIds = nodes.get('rootIds');
     //TODO: can try to optimise to send only children to rows
     return (
-      <div className="rows-container">
+      <div className='rows-container'>
         {rootNodeIds.map(nodeId => {
-          const node = nodes.getIn(["byId", nodeId]);
+          const node = nodes.getIn(['byId', nodeId]);
           return (
             <Row
-              key={node.get("id")}
-              nodeId={node.get("id")}
+              key={node.get('id')}
+              nodeId={node.get('id')}
               nodes={nodes}
               rowRenderer={rowRenderer}
               selectedNodeIds={selectedNodeIds}
