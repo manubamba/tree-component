@@ -1,4 +1,6 @@
 import React from "react";
+import { Map } from "immutable";
+
 import { autobind } from "core-decorators";
 import R from "ramda";
 import classNames from "classnames";
@@ -83,6 +85,7 @@ export default class App extends React.Component {
       "---",
       this.tree.getSelectedNode()
     );
+
     if (!node || node.id === this.tree.getSelectedNode()) {
       return false; // Prevent from deselecting the current node
     }
@@ -98,7 +101,7 @@ export default class App extends React.Component {
           onClick={this.handleClick}
           onExpand={this.handleExpand}
           ref={c => {
-            this.tree = c.state;
+            this.tree = c && c.state;
             console.log("Tree ", c);
           }}
           shouldSelectNode={this.shouldSelectNode}

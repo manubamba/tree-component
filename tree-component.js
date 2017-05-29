@@ -77,8 +77,14 @@ export default class TreeComponent extends React.Component {
   }
 
   filterCurrentNodes(newNodes, nodesToFilter) {
+    console.log(
+      "filterCurrentNodes ",
+      newNodes.get("byId"),
+      " ",
+      nodesToFilter
+    );
     return nodesToFilter.filter(nodeId =>
-      R.contains(nodeId, R.keys(newNodes.byId))
+      R.contains(nodeId, R.keys(newNodes.get("byId").keys))
     );
   }
 
@@ -92,14 +98,14 @@ export default class TreeComponent extends React.Component {
       loadingNodeIds
     });
     this.setState({
-      expandedNodeIds: this.filterCurrentNodes(
-        newNodes,
-        this.state.expandedNodeIds
-      ),
-      loadingNodeIds: this.filterCurrentNodes(
-        newNodes,
-        this.state.loadingNodeIds
-      ),
+      // expandedNodeIds: this.filterCurrentNodes(
+      //   newNodes,
+      //   this.state.expandedNodeIds
+      // ),
+      // loadingNodeIds: this.filterCurrentNodes(
+      //   newNodes,
+      //   this.state.loadingNodeIds
+      // ),
       selectedNodeIds: this.filterCurrentNodes(
         newNodes,
         this.state.selectedNodeIds
