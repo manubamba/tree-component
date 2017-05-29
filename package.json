@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config jest.config.js --coverage",
     "start": "concurrently --kill-others \"webpack-dev-server\""
   },
   "author": "",
@@ -39,12 +39,17 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "concurrently": "^3.1.0",
+    "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
     "eslint": "^3.10.2",
     "eslint-config-airbnb": "^14.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.7.1",
+    "jest": "^20.0.4",
     "less": "^2.7.1",
+    "react-addons-test-utils": "^15.5.1",
+    "sinon": "^2.3.2",
     "webpack": "2.4.1",
     "webpack-dev-server": "2.4.2"
   }
